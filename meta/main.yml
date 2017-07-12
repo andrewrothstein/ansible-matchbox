@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Andrew Rothstein
-  description: '@TODO name this role'
+  description: Installs CoreOS matchbox
   company: PointState Capital
   license:
     - MIT
