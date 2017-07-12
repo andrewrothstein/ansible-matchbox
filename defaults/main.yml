@@ -1,0 +1,12 @@
+---
+# defaults file for matchbox
+matchbox_ver: v0.6.1
+matchbox_checksums:
+  darwin-amd64: sha256:09c68cad68a7a5d4bbac026e4d9a600dc25f38109df849d46ca6b41419d7b798
+  linux-amd64: sha256:63cbdade21c20cb90e450dc6c77b1b8368a109320c4dee9d88c709dea239486c
+  linux-arm64: sha256:d1e7b39b7d75ae3944bdde45dff49d395349f787f3a7bd445b74ac5d78c6a968
+  linux-arm: sha256:0efc8554a0abd3b7cf63f1c9a5e80bef01d5fddb67260af0e28427dcf574538e
+
+matchbox_platform: linux-amd64
+matchbox_mirror: https://github.com/coreos/matchbox/releases/download
+matchbox_install_parent_dir: /usr/local

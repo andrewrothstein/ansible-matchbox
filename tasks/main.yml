@@ -1,0 +1,38 @@
+---
+- name: download tgz..
+  become: yes
+  become_user: root
+  get_url:
+    url: '{{matchbox_tgz_url}}'
+    dest: /tmp/{{matchbox_tgz}}
+    checksum: '{{matchbox_checksum}}'
+    mode: 0644
+
+- name: unarchive...
+  become: yes
+  become_user: root
+  unarchive:
+    copy: no
+    src: /tmp/{{matchbox_tgz}}
+    dest: '{{matchbox_install_parent_dir}}'
+    creates: '{{matchbox_install_dir}}'
+
+- name: link...
+  become: yes
+  become_user: root
+  file:
+    src: '{{matchbox_install_dir}}'
+    dest: '{{matchbox_link_dir}}'
+    state: link
+
+- name: add to login shell path
+  become: yes
+  become_user: root
+  with_items:
+    - f: matchbox.sh
+      d: /etc/profile.d
+      m: '0644'
+  template:
+    src: '{{item.f}}.j2'
+    dest: '{{item.d}}/{{item.f}}'
+    mode: '{{item.m}}'
