@@ -12,7 +12,7 @@
   become: yes
   become_user: root
   unarchive:
-    copy: no
+    remote_src: no
     src: /tmp/{{matchbox_tgz}}
     dest: '{{matchbox_install_parent_dir}}'
     creates: '{{matchbox_install_dir}}'
