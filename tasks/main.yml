@@ -1,21 +1,37 @@
 ---
-- name: download tgz..
+- name: check for install...
   become: yes
   become_user: root
-  get_url:
-    url: '{{matchbox_tgz_url}}'
-    dest: /tmp/{{matchbox_tgz}}
-    checksum: '{{matchbox_checksum}}'
-    mode: 0644
+  stat:
+    path: '{{matchbox_install_dir}}'
+  changed_when: False
+  register: matchbox_binary
+- when: not matchbox_binary.stat.exists
+  block:
+    - name: download tgz..
+      become: yes
+      become_user: root
+      get_url:
+        url: '{{matchbox_tgz_url}}'
+        dest: /tmp/{{matchbox_tgz}}
+        checksum: '{{matchbox_checksum}}'
+        mode: 0644
 
-- name: unarchive...
-  become: yes
-  become_user: root
-  unarchive:
-    remote_src: yes
-    src: /tmp/{{matchbox_tgz}}
-    dest: '{{matchbox_install_parent_dir}}'
-    creates: '{{matchbox_install_dir}}'
+    - name: unarchive...
+      become: yes
+      become_user: root
+      unarchive:
+        remote_src: yes
+        src: /tmp/{{matchbox_tgz}}
+        dest: '{{matchbox_install_parent_dir}}'
+        creates: '{{matchbox_install_dir}}'
+  always:
+    - name: cleanup...
+      become: yes
+      become_user: root
+      file:
+        path: /tmp/{{matchbox_tgz}}
+        state: absent
 
 - name: link...
   become: yes

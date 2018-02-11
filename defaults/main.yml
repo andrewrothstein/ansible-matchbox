@@ -1,11 +1,17 @@
 ---
 # defaults file for matchbox
-matchbox_ver: v0.6.1
+matchbox_ver: v0.7.0
 matchbox_checksums:
-  darwin-amd64: sha256:09c68cad68a7a5d4bbac026e4d9a600dc25f38109df849d46ca6b41419d7b798
-  linux-amd64: sha256:63cbdade21c20cb90e450dc6c77b1b8368a109320c4dee9d88c709dea239486c
-  linux-arm64: sha256:d1e7b39b7d75ae3944bdde45dff49d395349f787f3a7bd445b74ac5d78c6a968
-  linux-arm: sha256:0efc8554a0abd3b7cf63f1c9a5e80bef01d5fddb67260af0e28427dcf574538e
+  v0.6.1:
+    darwin-amd64: sha256:09c68cad68a7a5d4bbac026e4d9a600dc25f38109df849d46ca6b41419d7b798
+    linux-amd64: sha256:63cbdade21c20cb90e450dc6c77b1b8368a109320c4dee9d88c709dea239486c
+    linux-arm64: sha256:d1e7b39b7d75ae3944bdde45dff49d395349f787f3a7bd445b74ac5d78c6a968
+    linux-arm: sha256:0efc8554a0abd3b7cf63f1c9a5e80bef01d5fddb67260af0e28427dcf574538e
+  v0.7.0:
+    darwin-amd64: sha256:7cf64358446e54ca10f8296f851c7ca53d36cfc9705b546333046187ee6999f3
+    linux-amd64: sha256:aaf96b45f4f4886defce9eeefcfaec6ad31878ac0a9061b72390368d55fdba16
+    linux-arm: sha256:1e4430434dfa663e7b367da58de8ad01ab32b35a3dc83d7fbf5a2f92844b9da7
+    linux-arm64: sha256:10fbaeb6ac1a7008c2d02aef461cae7a745e0d3676c2269b8761bbb8a89a001d
 
 matchbox_platform: linux-amd64
 matchbox_mirror: https://github.com/coreos/matchbox/releases/download
