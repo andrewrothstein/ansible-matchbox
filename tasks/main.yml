@@ -3,7 +3,7 @@
   become: yes
   become_user: root
   stat:
-    path: '{{matchbox_install_dir}}'
+    path: '{{ matchbox_install_dir }}'
   changed_when: False
   register: matchbox_binary
 - when: not matchbox_binary.stat.exists
@@ -12,9 +12,9 @@
       become: yes
       become_user: root
       get_url:
-        url: '{{matchbox_tgz_url}}'
-        dest: /tmp/{{matchbox_tgz}}
-        checksum: '{{matchbox_checksum}}'
+        url: '{{ matchbox_tgz_url }}'
+        dest: /tmp/{{ matchbox_tgz }}
+        checksum: '{{ matchbox_checksum }}'
         mode: 0644
 
     - name: unarchive...
@@ -22,23 +22,23 @@
       become_user: root
       unarchive:
         remote_src: yes
-        src: /tmp/{{matchbox_tgz}}
-        dest: '{{matchbox_install_parent_dir}}'
-        creates: '{{matchbox_install_dir}}'
+        src: /tmp/{{ matchbox_tgz }}
+        dest: '{{ matchbox_install_parent_dir }}'
+        creates: '{{ matchbox_install_dir }}'
   always:
     - name: cleanup...
       become: yes
       become_user: root
       file:
-        path: /tmp/{{matchbox_tgz}}
+        path: /tmp/{{ matchbox_tgz }}
         state: absent
 
 - name: link...
   become: yes
   become_user: root
   file:
-    src: '{{matchbox_install_dir}}'
-    dest: '{{matchbox_link_dir}}'
+    src: '{{ matchbox_install_dir }}'
+    dest: '{{ matchbox_link_dir }}'
     state: link
 
 - name: add to login shell path
@@ -49,6 +49,6 @@
       d: /etc/profile.d
       m: '0644'
   template:
-    src: '{{item.f}}.j2'
-    dest: '{{item.d}}/{{item.f}}'
-    mode: '{{item.m}}'
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m }}'
