@@ -1,5 +1,7 @@
 ---
 # vars file for matchbox
+matchbox_platform: '{{ matchbox_os }}-{{ matchbox_arch }}'
+
 matchbox_name: matchbox-{{ matchbox_ver }}-{{ matchbox_platform }}
 matchbox_tgz: '{{ matchbox_name }}.tar.gz'
 matchbox_tgz_url: '{{ matchbox_mirror }}/{{ matchbox_ver }}/{{ matchbox_tgz }}'
@@ -7,3 +9,4 @@ matchbox_checksum: '{{ matchbox_checksums[matchbox_ver][matchbox_platform] }}'
 
 matchbox_install_dir: '{{ matchbox_install_parent_dir }}/{{ matchbox_name }}'
 matchbox_link_dir: '{{ matchbox_install_parent_dir }}/matchbox'
+matchbox_link: '{{ matchbox_install_parent_dir }}/bin/matchbox'

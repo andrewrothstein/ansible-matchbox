@@ -1,18 +1,38 @@
 #!/usr/bin/env sh
-VER=v0.7.1
 DIR=~/Downloads
-MIRROR=https://github.com/coreos/matchbox/releases/download
+MIRROR=https://github.com/poseidon/matchbox/releases/download
 
 dl()
 {
-    OS=$1
-    PLATFORM=$2
-    FILE=matchbox-$VER-$OS-$PLATFORM.tar.gz
-    wget -O $DIR/$FILE $MIRROR/$VER/$FILE
+    local ver=$1
+    local os=$2
+    local arch=$3
+    local platform="${os}-${arch}"
+    local file=matchbox-$ver-$platform.tar.gz
+    local lfile=$DIR/$file
+    local url=$MIRROR/$ver/$file
+    if [ ! -e $lfile ];
+    then
+        wget -q -O $lfile $url
+    fi
+    printf "    # %s\n" $url
+    printf "    %s: sha256:%s\n" $platform $(sha256sum $lfile | awk '{print $1}')
 }
 
-dl linux amd64
-dl linux arm64
-dl linux arm
-dl darwin amd64
-sha256sum $DIR/matchbox-$VER-*
+dl_ver() {
+    local ver=$1
+    printf "  %s:\n" $ver
+    dl $ver darwin amd64
+    dl $ver linux amd64
+    dl $ver linux arm
+    dl $ver linux arm64
+}
+
+dl_ver v0.5.0
+dl_ver v0.6.0
+dl_ver v0.6.1
+dl_ver v0.7.0
+dl_ver v0.7.1
+dl_ver v0.8.0
+
+dl_ver ${1:-v0.8.3}
