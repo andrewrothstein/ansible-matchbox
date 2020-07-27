@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+set -e
 DIR=~/Downloads
 MIRROR=https://github.com/poseidon/matchbox/releases/download
 
@@ -27,12 +28,5 @@ dl_ver() {
     dl $ver linux arm
     dl $ver linux arm64
 }
-
-dl_ver v0.5.0
-dl_ver v0.6.0
-dl_ver v0.6.1
-dl_ver v0.7.0
-dl_ver v0.7.1
-dl_ver v0.8.0
 
 dl_ver ${1:-v0.8.3}
