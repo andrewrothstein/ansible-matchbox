@@ -9,7 +9,7 @@
       skip: true
       paths:
         - '{{ role_path }}/vars'
-- name: check for install...
+- name: check for install in {{ matchbox_install_dir }}
   become: yes
   become_user: root
   stat:
@@ -18,31 +18,30 @@
   register: matchbox_binary
 - when: not matchbox_binary.stat.exists
   block:
-    - name: download tgz..
+    - name: downloading {{ matchbox_tgz_url }}
       become: yes
       become_user: root
       get_url:
         url: '{{ matchbox_tgz_url }}'
-        dest: /tmp/{{ matchbox_tgz }}
+        dest: '{{ matchbox_tmp_tgz }}'
         checksum: '{{ matchbox_checksum }}'
         mode: 0644
-
-    - name: unarchive...
+    - name: unarchiving {{ matchbox_tmp_tgz }} to {{ matchbox_install_parent_dir }}
       become: yes
       become_user: root
       unarchive:
         remote_src: yes
-        src: /tmp/{{ matchbox_tgz }}
+        src: '{{ matchbox_tmp_tgz }}'
         dest: '{{ matchbox_install_parent_dir }}'
         creates: '{{ matchbox_install_dir }}'
   always:
-    - name: cleanup...
+    - name: rm {{ matchbox_tmp_tgz }}
       become: yes
       become_user: root
       file:
-        path: /tmp/{{ matchbox_tgz }}
+        path: '{{ matchbox_tmp_tgz }}'
         state: absent
-- name: link...
+- name: linking {{ matchbox_link_dir }} to {{ matchbox_install_dir }}
   become: yes
   become_user: root
   file:
@@ -50,10 +49,10 @@
     dest: '{{ matchbox_link_dir }}'
     state: link
 
-- name: link executable...
+- name: linking {{ matchbox_link }} to {{ matchbox_install_exe }}
   become: yes
   become_user: root
   file:
-    src: '{{ matchbox_link_dir }}/matchbox'
+    src: '{{ matchbox_install_exe }}'
     dest: '{{ matchbox_link }}'
     state: link
