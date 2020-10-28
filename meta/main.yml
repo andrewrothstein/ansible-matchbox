@@ -4,7 +4,7 @@ dependencies:
 galaxy_info:
   author: Andrew Rothstein
   company: PointState Capital
-  description: Installs CoreOS matchbox
+  description: matchbox from posiedon
   galaxy_tags:
   - development
   license:
