@@ -1,6 +1,6 @@
 andrewrothstein.matchbox
 =========
-[![Build Status](https://travis-ci.org/andrewrothstein/ansible-matchbox.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-matchbox)
+![Build Status](https://github.com/andrewrothstein/ansible-matchbox/actions/workflows/build.yml/badge.svg)
 
 Installs [matchbox](https://coreos.com/matchbox/docs/latest/).
 
