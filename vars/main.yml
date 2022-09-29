@@ -1,5 +1,7 @@
 ---
 # vars file for matchbox
+matchbox_os: '{{ ansible_system | lower }}'
+matchbox_arch: '{{ matchbox_arch_map[ansible_architecture] }}'
 matchbox_platform: '{{ matchbox_os }}-{{ matchbox_arch }}'
 
 matchbox_name: matchbox-{{ matchbox_ver }}-{{ matchbox_platform }}
