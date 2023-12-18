@@ -1,8 +1,8 @@
 ---
-- include_role:
-    name: andrewrothstein.unarchive-deps
-- name: resolve platform specific vars
-  include_vars: '{{ item }}'
+- ansible.builtin.include_role:
+    name: andrewrothstein.unarchivedeps
+- name: Resolve platform specific vars
+  ansible.builtin.include_vars: '{{ item }}'
   with_first_found:
     - files:
         - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
@@ -11,50 +11,50 @@
       skip: true
       paths:
         - '{{ role_path }}/vars'
-- name: check for install in {{ matchbox_install_dir }}
+- name: Check for install in {{ matchbox_install_dir }}
   become: true
   become_user: root
-  stat:
+  ansible.builtin.stat:
     path: '{{ matchbox_install_dir }}'
   changed_when: false
   register: matchbox_binary
 - when: not matchbox_binary.stat.exists
   block:
-    - name: downloading {{ matchbox_tgz_url }}
+    - name: Downloading {{ matchbox_tgz_url }}
       become: true
       become_user: root
-      get_url:
+      ansible.builtin.get_url:
         url: '{{ matchbox_tgz_url }}'
         dest: '{{ matchbox_tmp_tgz }}'
         checksum: '{{ matchbox_checksum }}'
-        mode: 0644
+        mode: '644'
     - name: unarchiving {{ matchbox_tmp_tgz }} to {{ matchbox_install_parent_dir }}
       become: true
       become_user: root
-      unarchive:
+      ansible.builtin.unarchive:
         remote_src: true
         src: '{{ matchbox_tmp_tgz }}'
         dest: '{{ matchbox_install_parent_dir }}'
         creates: '{{ matchbox_install_dir }}'
   always:
-    - name: rm {{ matchbox_tmp_tgz }}
+    - name: Rm {{ matchbox_tmp_tgz }}
       become: true
       become_user: root
-      file:
+      ansible.builtin.file:
         path: '{{ matchbox_tmp_tgz }}'
         state: absent
-- name: linking {{ matchbox_link_dir }} to {{ matchbox_install_dir }}
+- name: Linking {{ matchbox_link_dir }} to {{ matchbox_install_dir }}
   become: true
   become_user: root
-  file:
+  ansible.builtin.file:
     src: '{{ matchbox_install_dir }}'
     dest: '{{ matchbox_link_dir }}'
     state: link
 
-- name: linking {{ matchbox_link }} to {{ matchbox_install_exe }}
+- name: Linking {{ matchbox_link }} to {{ matchbox_install_exe }}
   become: true
   become_user: root
-  file:
+  ansible.builtin.file:
     src: '{{ matchbox_install_exe }}'
     dest: '{{ matchbox_link }}'
     state: link
