@@ -1,10 +1,14 @@
 ---
-- hosts: all
-  roles:
-    - role: '{{ playbook_dir }}'
+- name: Testing andrewrothstein.matchbox
+  hosts: all
   tasks:
-    - command: /usr/local/bin/matchbox --version
+    - name: Installing andrewrothstein.matchbox
+      ansible.builtin.include_role:
+        name: '{{ playbook_dir }}'
+    - name: Executing 'matchbox --version'
+      ansible.builtin.command: /usr/local/bin/matchbox --version
+      changed_when: false
       register: matchbox_test_output
-    - name: matchbox --version
-      debug:
+    - name: Output from 'matchbox --version'
+      ansible.builtin.debug:
         msg: '{{ matchbox_test_output.stdout }}'

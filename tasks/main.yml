@@ -1,5 +1,6 @@
 ---
-- ansible.builtin.include_role:
+- name: Installing andrewrothstein.unarchivedeps
+  ansible.builtin.include_role:
     name: andrewrothstein.unarchivedeps
 - name: Resolve platform specific vars
   ansible.builtin.include_vars: '{{ item }}'
@@ -18,7 +19,8 @@
     path: '{{ matchbox_install_dir }}'
   changed_when: false
   register: matchbox_binary
-- when: not matchbox_binary.stat.exists
+- name: Downloading and installing matchbox
+  when: not matchbox_binary.stat.exists
   block:
     - name: Downloading {{ matchbox_tgz_url }}
       become: true
@@ -28,7 +30,7 @@
         dest: '{{ matchbox_tmp_tgz }}'
         checksum: '{{ matchbox_checksum }}'
         mode: '644'
-    - name: unarchiving {{ matchbox_tmp_tgz }} to {{ matchbox_install_parent_dir }}
+    - name: Unarchiving {{ matchbox_tmp_tgz }} to {{ matchbox_install_parent_dir }}
       become: true
       become_user: root
       ansible.builtin.unarchive:
