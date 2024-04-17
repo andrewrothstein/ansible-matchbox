@@ -1,6 +1,6 @@
 ---
 # defaults file for matchbox
-matchbox_ver: v0.10.0
+matchbox_ver: v0.11.0
 matchbox_arch_map:
   aarch64: arm64
   arm64: arm64
@@ -99,3 +99,14 @@ matchbox_checksums:
     linux-arm: sha256:da800160620fe0465e9d1be7fbe65e31f43f78579b87199255886d060b6198d1
     # https://github.com/poseidon/matchbox/releases/download/v0.10.0/matchbox-v0.10.0-linux-arm64.tar.gz
     linux-arm64: sha256:2db72c0436e9f1d6903c4189de3ee2a44c7b7f2283fe53c0b34181ecde0ee579
+  v0.11.0:
+    # https://github.com/poseidon/matchbox/releases/download/v0.11.0/matchbox-v0.11.0-darwin-amd64.tar.gz
+    darwin-amd64: sha256:fa8b97ca8eb1e93af43bc8e792386bc98c8ff68142aff8b186839d8bc2708f9f
+    # https://github.com/poseidon/matchbox/releases/download/v0.11.0/matchbox-v0.11.0-darwin-arm64.tar.gz
+    darwin-arm64: sha256:9c6238698ce42b137a8b341800f87c462f5c667e561b094f94f5c6cc1eddffde
+    # https://github.com/poseidon/matchbox/releases/download/v0.11.0/matchbox-v0.11.0-linux-amd64.tar.gz
+    linux-amd64: sha256:a341c73ac6415a3305111def40f30530c05a92064b58844527674b65d6d37545
+    # https://github.com/poseidon/matchbox/releases/download/v0.11.0/matchbox-v0.11.0-linux-arm.tar.gz
+    linux-arm: sha256:bb002c3411f45483bb82775f3da312a94fd7d7d953fec77273fd4b2c931438e3
+    # https://github.com/poseidon/matchbox/releases/download/v0.11.0/matchbox-v0.11.0-linux-arm64.tar.gz
+    linux-arm64: sha256:af75c14a93690e371e206aa98b196cbf6d11d11f1107d25941ba66b2a7a4e5c8
