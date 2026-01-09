@@ -18,17 +18,19 @@ galaxy_info:
     - name: Debian
       versions:
         - bookworm
-        - bullseye
+        - trixie
     - name: EL
       versions:
-        - '8'
+        - '10'
         - '9'
     - name: Fedora
       versions:
-        - '38'
-        - '39'
+        - all
+    - name: Kali
+      versions:
+        - all
     - name: Ubuntu
       versions:
-        - focal
         - jammy
+        - noble
   role_name: matchbox
